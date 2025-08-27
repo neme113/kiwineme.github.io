@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Video</title>
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <!-- URL-encode spaces (%20) and ! (%21) -->
+  <video id="bgVideo" autoplay loop playsinline>
+    <source src="kiwiwaluigi! | Crazy Funny Songs and Music.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <script>
+    const vid = document.getElementById("bgVideo");
+
+    function unmute() {
+      vid.muted = false;
+      vid.volume = 0.2; // 20% volume
+      vid.play();
+    }
+  </script>
+</body>
+</html>
