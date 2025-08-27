@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fullscreen Video</title>
+  <title>Fullscreen Video - Index</title>
   <style>
     body, html {
       margin: 0;
       height: 100%;
       overflow: hidden;
-      background-color: #000; /* Fallback background to avoid white screen */
+      background-color: #000; /* Fallback background to avoid black screen */
     }
     video {
       position: fixed;
@@ -20,21 +20,30 @@
       transform: translate(-50%, -50%);
       object-fit: cover;
     }
+    #error {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      z-index: 10;
+      font-family: Arial, sans-serif;
+    }
   </style>
 </head>
 <body>
   <video id="bgVideo" autoplay loop playsinline>
-    <source src="Kiwiwaluigi_Crazy_Funny_Songs_and_Music.mp4" type="video/mp4">
+    <source src="Kiwiwaluigi%21%20Crazy%20Funny%20Songs%20and%20Music.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
+  <div id="error"></div>
 
   <script>
     const vid = document.getElementById("bgVideo");
+    const errorDiv = document.getElementById("error");
     vid.volume = 0.2; // Set volume to 20%
-    // Attempt to play unmuted
     vid.play().catch(function(error) {
       console.error("Autoplay failed:", error);
-      // Fallback: Mute and play if autoplay with sound is blocked
+      errorDiv.textContent = "Autoplay blocked: Playing muted video.";
       vid.muted = true;
       vid.play();
     });
