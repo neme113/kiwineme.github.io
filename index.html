@@ -9,6 +9,7 @@
       margin: 0;
       height: 100%;
       overflow: hidden;
+      background-color: #000; /* Fallback background to avoid white screen */
     }
     video {
       position: fixed;
@@ -19,32 +20,24 @@
       transform: translate(-50%, -50%);
       object-fit: cover;
     }
-    button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 10;
-    }
   </style>
 </head>
 <body>
-  <!-- URL-encode spaces (%20) and ! (%21) -->
   <video id="bgVideo" autoplay loop playsinline>
-    <source src="Kiwiwaluigi! Crazy Funny Songs and Music.mp4" type="video/mp4">
+    <source src="Kiwiwaluigi_Crazy_Funny_Songs_and_Music.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 
   <script>
     const vid = document.getElementById("bgVideo");
-
-    function unmute() {
-      vid.muted = false;
-      vid.volume = 0.2; // 20% volume
+    vid.volume = 0.2; // Set volume to 20%
+    // Attempt to play unmuted
+    vid.play().catch(function(error) {
+      console.error("Autoplay failed:", error);
+      // Fallback: Mute and play if autoplay with sound is blocked
+      vid.muted = true;
       vid.play();
-    }
+    });
   </script>
 </body>
 </html>
