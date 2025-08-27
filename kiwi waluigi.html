@@ -31,7 +31,7 @@
   </style>
 </head>
 <body>
-  <video id="bgVideo" autoplay loop playsinline>
+  <video id="bgVideo" autoplay loop playsinline muted>
     <source src="Kiwiwaluigi%21%20Crazy%20Funny%20Songs%20and%20Music.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
@@ -40,12 +40,18 @@
   <script>
     const vid = document.getElementById("bgVideo");
     const errorDiv = document.getElementById("error");
-    vid.volume = 0.2; // Set volume to 20%
+    vid.volume = 0.2; // Set volume to 20% when unmuted
+
+    // Attempt to autoplay muted
     vid.play().catch(function(error) {
       console.error("Autoplay failed:", error);
-      errorDiv.textContent = "Autoplay blocked: Playing muted video.";
-      vid.muted = true;
-      vid.play();
+      errorDiv.textContent = "Autoplay failed: Check video file or browser settings.";
+    });
+
+    // Add click event to unmute anywhere on the page
+    document.body.addEventListener('click', function() {
+      vid.muted = false;
+      errorDiv.textContent = "Video unmuted.";
     });
   </script>
 </body>
